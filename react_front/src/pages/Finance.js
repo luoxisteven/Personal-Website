@@ -3,7 +3,7 @@ import { Box, Typography } from '@mui/material';
 import CustomAppBar from '../components/AppBar';
 import { SettingsContext } from '../context/SettingsContext'; // 引入 SettingsContext
 
-const Home = () => {
+const Finance = () => {
   const { language, themeMode, toggleLanguage, toggleTheme } = useContext(SettingsContext);// 获取当前语言
 
   return (
@@ -19,11 +19,11 @@ const Home = () => {
       <CustomAppBar />
       <Box sx={{ mt: 8, textAlign: 'center' }}>
         <Typography variant="h4" gutterBottom>
-          {language === 'en' ? 'Welcome!' : '欢迎！'}
+          {language === 'en' ? 'Finance!' : '金融面板！'}
         </Typography>
       </Box>
     </Box>
   );
 };
 
-export default Home;
+export default Finance;
