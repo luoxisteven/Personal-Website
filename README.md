@@ -13,7 +13,11 @@
     - 需要一个Finance的UI
 - Django
     - 注册/登陆
-    - JWT
-    -
+    
 - Akshare (Python Packages CHN Stock API)
     - https://akshare.akfamily.xyz
+- Cybersecurity
+    - JWT
+
+## Notes
+好累啊，好多东西要做。
