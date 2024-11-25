@@ -21,3 +21,6 @@
 
 ## Notes
 好累啊，好多东西要做。
+
+## Layout
+![Website Layout](./assets/img/layout.png)  
