@@ -37,7 +37,7 @@ const ProfileCard = () => {
   return (
     <Card
       sx={{
-        width: 345,
+        width: 320,
         padding: 2,
         textAlign: "center",
         boxShadow: "none !important", // 强制移除阴影

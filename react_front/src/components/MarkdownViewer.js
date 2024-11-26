@@ -27,9 +27,6 @@ const MarkdownViewer = ({ filePath }) => {
 
   return (
     <Box sx={{ p: 4, maxWidth: "800px", margin: "0 auto" }}>
-      <Typography variant="h4" gutterBottom>
-        Markdown Viewer
-      </Typography>
       <Box
         sx={{
           border: "1px solid #ccc",
@@ -44,29 +41,50 @@ const MarkdownViewer = ({ filePath }) => {
             rehypePlugins={[rehypeKatex]}
             components={{
               h1: ({ node, ...props }) => (
-                <Typography variant="h4" gutterBottom {...props} />
+                <Typography
+                  variant="h5"
+                  gutterBottom
+                  sx={{ fontSize: "1.5rem", fontWeight: "bold" }}
+                  {...props}
+                />
               ),
               h2: ({ node, ...props }) => (
-                <Typography variant="h5" gutterBottom {...props} />
+                <Typography
+                  variant="h6"
+                  gutterBottom
+                  sx={{ fontSize: "1.25rem", fontWeight: 600 }}
+                  {...props}
+                />
               ),
               h3: ({ node, ...props }) => (
-                <Typography variant="h6" gutterBottom {...props} />
+                <Typography
+                  variant="subtitle1"
+                  gutterBottom
+                  sx={{ fontSize: "1.1rem", fontWeight: 600 }}
+                  {...props}
+                />
               ),
               p: ({ node, ...props }) => (
-                <Typography variant="body1" gutterBottom {...props} />
+                <Typography
+                  variant="body2"
+                  gutterBottom
+                  sx={{ fontSize: "0.95rem" }}
+                  {...props}
+                />
               ),
               li: ({ node, ...props }) => (
                 <Typography
                   component="li"
-                  variant="body1"
+                  variant="body2"
                   gutterBottom
+                  sx={{ fontSize: "0.95rem" }}
                   {...props}
                 />
               ),
             }}
           />
         ) : (
-          <Typography variant="body1" color="textSecondary">
+          <Typography variant="body2" color="textSecondary">
             正在加载内容...
           </Typography>
         )}
