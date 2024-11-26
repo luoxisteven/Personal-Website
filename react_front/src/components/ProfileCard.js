@@ -7,6 +7,7 @@ import {
   Grid,
   IconButton,
   Box,
+  Link,
 } from "@mui/material";
 import { SettingsContext } from "../context/SettingsContext";
 import EmailIcon from "@mui/icons-material/Email";
@@ -32,7 +33,6 @@ const ProfileCard = () => {
   // 根据语言状态动态设置文本内容
   const name = language === "en" ? "Xi Luo" : "骆熙";
   const title = language === "en" ? "Junior Machine Learning Engineer" : "初级机器学习工程师";
-  const company = "@addaxis.ai";
 
   return (
     <Card
@@ -66,9 +66,16 @@ const ProfileCard = () => {
         <Typography variant="subtitle1" color="text.secondary">
           {title}
         </Typography>
-        <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
-          {company}
-        </Typography>
+        <Link
+          href="https://addaxis.ai"
+          target="_blank" // 在新标签页中打开
+          rel="noopener noreferrer" // 安全属性
+          color="inherit" // 继承父组件颜色
+          underline="hover" // 设置下划线样式
+          sx={{ mt: 1, display: "inline-block" }}
+        >
+          @addaxis.ai
+        </Link>
       </CardContent>
 
       {/* 按钮区域 */}
