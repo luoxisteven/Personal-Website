@@ -11,7 +11,8 @@ const Home = () => {
   return (
     <Box
       sx={{
-        minHeight: '100vh',
+        marginTop: '64px', // 避免与 AppBar 重叠
+        height: 'calc(100vh - 64px)',
         display: 'flex',
         flexDirection: 'column',
       }}
@@ -19,17 +20,14 @@ const Home = () => {
       {/* AppBar 部分 */}
       <CustomAppBar />
 
-      {/* 主内容部分 */}
+      {/* 主内容部分 - 桌面端 */}
       <Container
         maxWidth="lg"
         sx={{
-          display: 'flex',
-          flexDirection: 'row',
-          alignItems: 'center', // 保证水平方向对齐
-          justifyContent: 'space-between', // 水平方向分布空间
-          paddingTop: '64px', // 避免与 AppBar 重叠
-          position: 'relative',
-          height: 'calc(100vh - 64px)', // 去掉 AppBar 的高度
+          display: { xs: 'none', md: 'flex' }, // 仅桌面端显示
+          alignItems: 'center', // 确保子元素在 Y 轴居中
+          justifyContent: 'space-between',
+          height: 'calc(100vh - 64px)', // 减去 AppBar 的高度
         }}
       >
         {/* ProfileCard 部分 */}
@@ -37,12 +35,7 @@ const Home = () => {
           sx={{
             flex: '1 1 20%',
             display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            height: '100%', // 保持 ProfileCard 容器高度为 100%
-            marginRight: '0px',
-            margin: 0, // 确保没有额外间距
-            padding: 0, // 确保内部没有额外间距
+            alignItems: 'center', // 子项 Y 轴居中
           }}
         >
           <ProfileCard />
@@ -52,12 +45,45 @@ const Home = () => {
         <Box
           sx={{
             flex: '1 1 80%',
-            height: '100%',
-            overflowY: 'auto', // 启用垂直滚动
-            borderRadius: '8px', // 添加圆角
-            boxShadow: '0 2px 10px rgba(0,0,0,0.1)', // 添加阴影效果
-            margin: 0, // 确保没有额外间距
-            padding: 0, // 确保内部没有额外间距
+            height: '100%', // 高度撑满父级
+            display: 'flex',
+            alignItems: 'center', // 子项 Y 轴居中
+          }}
+        >
+          <MarkdownViewer filePath="md/luoxisteven.md" />
+        </Box>
+      </Container>
+
+      {/* 主内容部分 - 移动端 */}
+      <Container
+        maxWidth="sm"
+        sx={{
+          display: { xs: 'flex', md: 'none' }, // 仅移动端显示
+          flexDirection: 'column', // 垂直堆叠
+          alignItems: 'center', // 确保子元素在 X 轴居中
+          justifyContent: 'flex-start', // 从顶部开始布局
+          height: 'calc(100vh - 64px)', // 减去 AppBar 的高度
+          gap: 2, // 子项间距
+          marginTop: '64px', // 为移动端内容添加顶部间距
+        }}
+      >
+        {/* ProfileCard 部分 */}
+        <Box
+          sx={{
+            width: '100%', // 占满宽度
+            display: 'flex',
+            justifyContent: 'center', // 居中对齐
+          }}
+        >
+          <ProfileCard />
+        </Box>
+
+        {/* MarkdownViewer 部分 */}
+        <Box
+          sx={{
+            width: '100%', // 占满宽度
+            display: 'flex',
+            justifyContent: 'center', // 居中对齐
           }}
         >
           <MarkdownViewer filePath="md/luoxisteven.md" />

@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
-import ReactMarkdown from "react-markdown";
-import remarkMath from "remark-math";
-import rehypeKatex from "rehype-katex";
-import { Box, Typography } from "@mui/material";
-import "katex/dist/katex.min.css"; 
+import Markdown from "mui-markdown";
+import { Box, Typography, useTheme } from "@mui/material";
+import { SettingsContext } from "../context/SettingsContext";
 
 const MarkdownViewer = ({ filePath }) => {
   const [markdownContent, setMarkdownContent] = useState("");
+  const { themeMode } = useContext(SettingsContext); // 获取主题模式
+  const theme = useTheme(); // Material-UI 主题
 
   useEffect(() => {
     const loadMarkdown = async () => {
@@ -26,63 +26,46 @@ const MarkdownViewer = ({ filePath }) => {
   }, [filePath]);
 
   return (
-    <Box sx={{ p: 4, maxWidth: "800px", margin: "0 auto" }}>
+    <Box sx={{ p: 3, margin: "0 auto" }}>
       <Box
         sx={{
-          border: "1px solid #ccc",
           borderRadius: "8px",
           p: 2,
+        //   border: `1px solid ${
+        //     themeMode === "light"
+        //       ? theme.palette.grey[300] // 浅色模式下，边框颜色浅灰色
+        //       : theme.palette.grey[800] // 深色模式下，边框颜色稍深灰色
+        //   }`,
+        //   backgroundColor: themeMode === "light" ? theme.palette.grey[50] : theme.palette.grey[900], // 背景颜色
         }}
       >
         {markdownContent ? (
-          <ReactMarkdown
-            children={markdownContent}
-            remarkPlugins={[remarkMath]}
-            rehypePlugins={[rehypeKatex]}
-            components={{
-              h1: ({ node, ...props }) => (
-                <Typography
-                  variant="h5"
-                  gutterBottom
-                  sx={{ fontSize: "1.5rem", fontWeight: "bold" }}
-                  {...props}
-                />
-              ),
-              h2: ({ node, ...props }) => (
-                <Typography
-                  variant="h6"
-                  gutterBottom
-                  sx={{ fontSize: "1.25rem", fontWeight: 600 }}
-                  {...props}
-                />
-              ),
-              h3: ({ node, ...props }) => (
-                <Typography
-                  variant="subtitle1"
-                  gutterBottom
-                  sx={{ fontSize: "1.1rem", fontWeight: 600 }}
-                  {...props}
-                />
-              ),
-              p: ({ node, ...props }) => (
-                <Typography
-                  variant="body2"
-                  gutterBottom
-                  sx={{ fontSize: "0.95rem" }}
-                  {...props}
-                />
-              ),
-              li: ({ node, ...props }) => (
-                <Typography
-                  component="li"
-                  variant="body2"
-                  gutterBottom
-                  sx={{ fontSize: "0.95rem" }}
-                  {...props}
-                />
-              ),
+          <Markdown
+            overrides={{
+              h1: {
+                component: Typography,
+                props: { variant: "h5", gutterBottom: true, sx: { fontWeight: 600 } },
+              },
+              h2: {
+                component: Typography,
+                props: { variant: "h6", gutterBottom: true, sx: { fontWeight: 600 } },
+              },
+              h3: {
+                component: Typography,
+                props: { variant: "subtitle1", gutterBottom: true, sx: { fontWeight: 600 } },
+              },
+              p: {
+                component: Typography,
+                props: { variant: "body", gutterBottom: true, sx: { fontSize: "0.9rem" } },
+              },
+              li: {
+                component: Typography,
+                props: { component: "li", variant: "body", gutterBottom: true, sx: { fontSize: "0.9rem" } },
+              },
             }}
-          />
+          >
+            {markdownContent}
+          </Markdown>
         ) : (
           <Typography variant="body2" color="textSecondary">
             正在加载内容...
