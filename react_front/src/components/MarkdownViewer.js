@@ -12,7 +12,6 @@ const MarkdownViewer = ({ filePath }) => {
   useEffect(() => {
     const loadMarkdown = async () => {
       try {
-        console.log(filePath);
         const response = await axios.get(filePath);
         setMarkdownContent(response.data);
       } catch (error) {
