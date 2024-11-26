@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   Card,
   CardContent,
@@ -8,6 +8,7 @@ import {
   IconButton,
   Box,
 } from "@mui/material";
+import { SettingsContext } from "../context/SettingsContext";
 import EmailIcon from "@mui/icons-material/Email";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import FlickrIcon from "@mui/icons-material/PhotoLibrary";
@@ -17,6 +18,7 @@ import LinkIcon from "@mui/icons-material/Link";
 const ProfileCard = () => {
   // 使用 useState 管理头像路径
   const [avatar, setAvatar] = useState(require("../assets/img/steven.JPG"));
+  const { language } = useContext(SettingsContext); // 从 Context 中获取语言状态
 
   // 切换图片的处理函数
   const handleAvatarClick = () => {
@@ -27,10 +29,15 @@ const ProfileCard = () => {
     );
   };
 
+  // 根据语言状态动态设置文本内容
+  const name = language === "en" ? "Xi Luo" : "骆熙";
+  const title = language === "en" ? "Junior Machine Learning Engineer" : "初级机器学习工程师";
+  const company = "@addaxis.ai";
+
   return (
     <Card
       sx={{
-        maxWidth: 345,
+        width: 345,
         padding: 2,
         textAlign: "center",
         boxShadow: "none !important", // 强制移除阴影
@@ -40,7 +47,7 @@ const ProfileCard = () => {
       {/* 头像 */}
       <CardMedia
         component="img"
-        alt="Steven Luo"
+        alt={name}
         src={avatar}
         onClick={handleAvatarClick} // 添加点击事件处理函数
         sx={{
@@ -54,13 +61,13 @@ const ProfileCard = () => {
       {/* 内容 */}
       <CardContent>
         <Typography variant="h6" component="div">
-          Xi Luo
+          {name}
         </Typography>
         <Typography variant="subtitle1" color="text.secondary">
-          Junior Machine Learning Engineer
+          {title}
         </Typography>
         <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
-          @addaxis.ai
+          {company}
         </Typography>
       </CardContent>
 
