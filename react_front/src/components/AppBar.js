@@ -12,12 +12,14 @@ import {
   Drawer,
   Avatar,
 } from '@mui/material';
-import { Link } from 'react-router-dom'; // 引入 Link
+import { Link } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
+import { SettingsContext } from '../context/SettingsContext';
 import ThemeSwitch from './ThemeSwitch';
 import LanguageSwitchComponent from './LanguageSwitch';
 
+// 样式化 Toolbar
 const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
@@ -34,9 +36,33 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   padding: '8px 12px',
 }));
 
+// 按钮的翻译内容
+const translations = {
+  en: {
+    home: 'Home',
+    blogs: 'Blogs',
+    projects: 'Projects',
+    finance: 'Finance',
+    profile: 'Profile',
+    login: 'Log in',
+    signup: 'Sign up',
+  },
+  cn: {
+    home: '主页',
+    blogs: '博客',
+    projects: '项目',
+    finance: '金融面板',
+    profile: '个人简介',
+    login: '登录',
+    signup: '注册',
+  },
+};
+
 export default function CustomAppBar() {
+  const { language, toggleLanguage, themeMode, toggleTheme } = useContext(SettingsContext); // 从 Context 中获取状态和方法
   const [open, setOpen] = useState(false);
 
+  // 切换 Drawer
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
   };
@@ -67,21 +93,22 @@ export default function CustomAppBar() {
               }}
             />
 
+            {/* 导航按钮 */}
             <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
               <Button component={Link} to="/" variant="text" color="info" size="small" sx={{ minWidth: 0 }}>
-                Home
+                {translations[language].home}
               </Button>
               <Button component={Link} to="/blogs" variant="text" color="info" size="small" sx={{ minWidth: 0 }}>
-                Blogs
+                {translations[language].blogs}
               </Button>
               <Button component={Link} to="/projects" variant="text" color="info" size="small" sx={{ minWidth: 0 }}>
-                Projects
+                {translations[language].projects}
               </Button>
               <Button component={Link} to="/fin" variant="text" color="info" size="small" sx={{ minWidth: 0 }}>
-                Finance
+                {translations[language].finance}
               </Button>
               <Button component={Link} to="/profile" variant="text" color="info" size="small" sx={{ minWidth: 0 }}>
-                Profile
+                {translations[language].profile}
               </Button>
             </Box>
           </Box>
@@ -94,8 +121,8 @@ export default function CustomAppBar() {
               alignItems: 'center',
             }}
           >
-            <LanguageSwitchComponent /> {/* 使用语言切换组件 */}
-            <ThemeSwitch /> {/* 使用主题切换组件 */}
+            <LanguageSwitchComponent onClick={toggleLanguage} /> {/* 切换语言 */}
+            <ThemeSwitch onClick={toggleTheme} /> {/* 切换主题 */}
           </Box>
           <Box
             sx={{
@@ -105,10 +132,10 @@ export default function CustomAppBar() {
             }}
           >
             <Button component={Link} to="/login" color="primary" variant="outlined" size="small">
-              Log in
+              {translations[language].login}
             </Button>
             <Button color="primary" variant="contained" size="small">
-              Sign up
+              {translations[language].signup}
             </Button>
           </Box>
 
@@ -139,36 +166,36 @@ export default function CustomAppBar() {
                   </IconButton>
                 </Box>
                 <MenuItem component={Link} to="/">
-                  Home
+                  {translations[language].home}
                 </MenuItem>
                 <MenuItem component={Link} to="/blogs">
-                  Blogs
+                  {translations[language].blogs}
                 </MenuItem>
                 <MenuItem component={Link} to="/projects">
-                  Projects
+                  {translations[language].projects}
                 </MenuItem>
                 <MenuItem component={Link} to="/fin">
-                  Finance
+                  {translations[language].finance}
                 </MenuItem>
                 <MenuItem component={Link} to="/profile">
-                  Profile
+                  {translations[language].profile}
                 </MenuItem>
                 <Divider sx={{ my: 3 }} />
                 <MenuItem>
-                  <LanguageSwitchComponent /> {/* 在移动端菜单中使用语言切换组件 */}
+                  <LanguageSwitchComponent onClick={toggleLanguage} />
                 </MenuItem>
                 <MenuItem>
-                  <ThemeSwitch /> {/* 在移动端菜单中使用主题切换组件 */}
+                  <ThemeSwitch onClick={toggleTheme} />
                 </MenuItem>
                 <Divider sx={{ my: 3 }} />
                 <MenuItem>
                   <Button component={Link} to="/login" color="primary" variant="contained" fullWidth>
-                    Sign up
+                    {translations[language].signup}
                   </Button>
                 </MenuItem>
                 <MenuItem>
                   <Button component={Link} to="/login" color="primary" variant="outlined" fullWidth>
-                    Sign in
+                    {translations[language].login}
                   </Button>
                 </MenuItem>
               </Box>
