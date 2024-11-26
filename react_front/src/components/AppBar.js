@@ -41,6 +41,7 @@ const translations = {
   en: {
     home: 'Home',
     blogs: 'Blogs',
+    notes: 'Notes',
     projects: 'Projects',
     finance: 'Finance',
     profile: 'Profile',
@@ -50,6 +51,7 @@ const translations = {
   cn: {
     home: '主页',
     blogs: '博客',
+    notes: '笔记',
     projects: '项目',
     finance: '金融面板',
     profile: '个人简介',
@@ -100,6 +102,9 @@ export default function CustomAppBar() {
               </Button>
               <Button component={Link} to="/blogs" variant="text" color="info" size="small" sx={{ minWidth: 0 }}>
                 {translations[language].blogs}
+              </Button>
+              <Button component={Link} to="/notes" variant="text" color="info" size="small" sx={{ minWidth: 0 }}>
+                {translations[language].notes}
               </Button>
               <Button component={Link} to="/projects" variant="text" color="info" size="small" sx={{ minWidth: 0 }}>
                 {translations[language].projects}
@@ -170,6 +175,9 @@ export default function CustomAppBar() {
                 </MenuItem>
                 <MenuItem component={Link} to="/blogs">
                   {translations[language].blogs}
+                </MenuItem>
+                <MenuItem component={Link} to="/notes">
+                  {translations[language].notes}
                 </MenuItem>
                 <MenuItem component={Link} to="/projects">
                   {translations[language].projects}
