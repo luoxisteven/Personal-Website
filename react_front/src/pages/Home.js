@@ -3,6 +3,7 @@ import { Box, Container } from '@mui/material';
 import CustomAppBar from '../components/AppBar';
 import ProfileCard from "../components/ProfileCard";
 import { SettingsContext } from '../context/SettingsContext';
+import MarkdownViewer from "../components/MarkdownViewer";
 
 const Home = () => {
   const { language, themeMode, toggleLanguage, toggleTheme } = useContext(SettingsContext); // 获取当前语言
@@ -32,6 +33,7 @@ const Home = () => {
         <Box sx={{ textAlign: 'left', marginLeft: '50px' }}> {/* 确保文字内容左对齐 */}
           <ProfileCard />
         </Box>
+        <MarkdownViewer filePath="md/luoxisteven.md" />
       </Container>
     </Box>
   );
