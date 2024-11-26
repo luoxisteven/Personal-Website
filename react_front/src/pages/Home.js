@@ -1,10 +1,11 @@
 import React, { useContext } from 'react';
-import { Box, Typography } from '@mui/material';
+import { Box, Container } from '@mui/material';
 import CustomAppBar from '../components/AppBar';
-import { SettingsContext } from '../context/SettingsContext'; // 引入 SettingsContext
+import ProfileCard from "../components/ProfileCard";
+import { SettingsContext } from '../context/SettingsContext';
 
 const Home = () => {
-  const { language, themeMode, toggleLanguage, toggleTheme } = useContext(SettingsContext);// 获取当前语言
+  const { language, themeMode, toggleLanguage, toggleTheme } = useContext(SettingsContext); // 获取当前语言
 
   return (
     <Box
@@ -13,15 +14,25 @@ const Home = () => {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        alignItems: 'center',
       }}
     >
+      {/* AppBar 部分 */}
       <CustomAppBar />
-      <Box sx={{ mt: 8, textAlign: 'center' }}>
-        <Typography variant="h4" gutterBottom>
-          {language === 'en' ? 'Welcome!' : '欢迎！'}
-        </Typography>
-      </Box>
+
+      {/* ProfileCard 部分 */}
+      <Container
+        maxWidth="lg"
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'flex-start', // 将内容左对齐
+          minHeight: 'calc(100vh - 64px)', // 让内容垂直居中，减去 AppBar 的高度
+        }}
+      >
+        <Box sx={{ textAlign: 'left', marginLeft: '50px' }}> {/* 确保文字内容左对齐 */}
+          <ProfileCard />
+        </Box>
+      </Container>
     </Box>
   );
 };
