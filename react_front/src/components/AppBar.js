@@ -85,7 +85,7 @@ export default function CustomAppBar() {
           {/* 圆形头像 */}
           <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center', px: 0 }}>
             <Avatar
-              src={require('../assets/img/steven_cartoon_2.JPG')}
+              src={require('../assets/img/steven_cartoon.JPG')}
               alt="Steven Logo"
               sx={{
                 width: 30,
